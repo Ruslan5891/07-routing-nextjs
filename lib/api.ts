@@ -1,7 +1,14 @@
-import api from './axios';
+import axios from 'axios';
 import type { NewNote, Note, NoteTag } from '@/types/note';
 
 export const PER_PAGE = 12;
+
+const api = axios.create({
+  baseURL: 'https://notehub-public.goit.study/api',
+  headers: {
+    Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
+  },
+});
 
 export interface FetchNotesOptions {
   page?: number;

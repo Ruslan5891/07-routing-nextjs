@@ -66,7 +66,7 @@ app/
       @sidebar/default.tsx          SidebarNotes — меню фільтрів за тегами
       [...slug]/                    catch-all маршрут зі списком нотаток
 components/                         компоненти, не прив'язані до маршруту (тека на компонент)
-lib/api/                            axios-інстанс і функції роботи з NoteHub API
+lib/api.ts                          axios-інстанс і функції роботи з NoteHub API
 types/note.ts                       загальні типи, інтерфейси та перелік тегів
 ```
 
