@@ -6,8 +6,6 @@ interface NotesLayoutProps {
   sidebar: ReactNode;
 }
 
-// Слот @sidebar рендериться паралельно з children: зміна тега перемальовує
-// лише область нотаток, а меню фільтрів лишається змонтованим
 export default function NotesLayout({ children, sidebar }: NotesLayoutProps) {
   return (
     <div className={css.container}>

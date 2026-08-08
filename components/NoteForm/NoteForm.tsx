@@ -43,8 +43,6 @@ export default function NoteForm({ onClose }: NoteFormProps) {
     },
   });
 
-  // Форму не скидаємо вручну: поки триває запит, введені значення лишаються на місці,
-  // а після успіху onSuccess закриває модалку — і форма розмонтовується разом із нею
   const handleSubmit = (values: NewNote) => {
     mutate(values);
   };

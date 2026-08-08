@@ -1,4 +1,3 @@
-// Бекенд не віддає перелік тегів окремим маршрутом, тому тримаємо його в коді
 export const NOTE_TAGS = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'] as const;
 
 export type NoteTag = (typeof NOTE_TAGS)[number];
@@ -18,6 +17,10 @@ export interface NewNote {
   tag: NoteTag;
 }
 
-export function isNoteTag(value: string): value is NoteTag {
-  return (NOTE_TAGS as readonly string[]).includes(value);
+export function tagToSlug(tag: NoteTag): string {
+  return tag.toLowerCase();
+}
+
+export function slugToTag(slug: string): NoteTag | undefined {
+  return NOTE_TAGS.find(tag => tag.toLowerCase() === slug.toLowerCase());
 }

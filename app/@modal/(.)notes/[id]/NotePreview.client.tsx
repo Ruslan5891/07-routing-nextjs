@@ -20,7 +20,6 @@ export default function NotePreview() {
     refetchOnMount: false,
   });
 
-  // Закриття модалки — це повернення на маршрут, з якого її відкрили
   const handleClose = () => {
     router.back();
   };

@@ -34,7 +34,6 @@ export async function fetchNotes({
     params.search = search.trim();
   }
 
-  // Фільтр «All notes» — це відсутність тега в запиті, бекенд тега all не знає
   if (tag) {
     params.tag = tag;
   }

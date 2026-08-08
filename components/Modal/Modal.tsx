@@ -10,8 +10,6 @@ interface ModalProps {
   onClose: () => void;
 }
 
-// Модалка монтується лише у відповідь на клік користувача, тому на сервері
-// вона ніколи не рендериться і document.body тут завжди доступний
 export default function Modal({ children, onClose }: ModalProps) {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {

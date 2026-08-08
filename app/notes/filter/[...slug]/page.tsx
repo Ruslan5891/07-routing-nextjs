@@ -2,38 +2,37 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 import { PER_PAGE, fetchNotes } from '@/lib/api';
-import { isNoteTag } from '@/types/note';
+import { slugToTag } from '@/types/note';
 import type { NoteTag } from '@/types/note';
 import NotesClient from './Notes.client';
 
-// slug[0] — це або службове значення all, або назва тега
 function resolveTag(slug: string[]): NoteTag | undefined {
   const [value] = slug;
 
-  if (value === 'all') {
+  if (value.toLowerCase() === 'all') {
     return undefined;
   }
 
-  if (!isNoteTag(value)) {
+  const tag = slugToTag(value);
+
+  if (!tag) {
     notFound();
   }
 
-  return value;
+  return tag;
 }
 
 export async function generateMetadata({
   params,
 }: PageProps<'/notes/filter/[...slug]'>): Promise<Metadata> {
   const { slug } = await params;
-  const [value] = slug;
-  const title = value === 'all' ? 'All notes | NoteHub' : `${value} notes | NoteHub`;
+  const tag = resolveTag(slug);
 
   return {
-    title,
-    description:
-      value === 'all'
-        ? 'Browse, search and create your personal notes.'
-        : `Notes filtered by the "${value}" tag.`,
+    title: tag ? `${tag} notes | NoteHub` : 'All notes | NoteHub',
+    description: tag
+      ? `Notes filtered by the "${tag}" tag.`
+      : 'Browse, search and create your personal notes.',
   };
 }
 
@@ -50,7 +49,6 @@ export default async function FilteredNotesPage({ params }: PageProps<'/notes/fi
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      {/* key скидає пошук і пагінацію під час переходу на інший тег */}
       <NotesClient key={tag ?? 'all'} tag={tag} />
     </HydrationBoundary>
   );
