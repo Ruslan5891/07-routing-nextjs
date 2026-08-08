@@ -12,13 +12,14 @@ export const metadata: Metadata = {
     'NoteHub is a simple and efficient application designed for managing personal notes.',
 };
 
-export default function RootLayout({ children }: LayoutProps<'/'>) {
+export default function RootLayout({ children, modal }: LayoutProps<'/'>) {
   return (
     <html lang="en">
       <body>
         <TanStackProvider>
           <Header />
           <div className={css.content}>{children}</div>
+          {modal}
           <Footer />
         </TanStackProvider>
       </body>

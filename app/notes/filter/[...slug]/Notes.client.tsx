@@ -13,19 +13,24 @@ import Loader from '@/components/Loader/Loader';
 import ErrorMessage from '@/components/ErrorMessage/ErrorMessage';
 import EmptyState from '@/components/EmptyState/EmptyState';
 import { PER_PAGE, fetchNotes } from '@/lib/api';
+import type { NoteTag } from '@/types/note';
 import css from './Notes.client.module.css';
 
 const DEBOUNCE_DELAY = 500;
 
-export default function NotesClient() {
+interface NotesClientProps {
+  tag?: NoteTag;
+}
+
+export default function NotesClient({ tag }: NotesClientProps) {
   const [inputValue, setInputValue] = useState('');
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ['notes', search, page],
-    queryFn: () => fetchNotes(page, PER_PAGE, search),
+    queryKey: ['notes', { search, page, tag: tag ?? null }],
+    queryFn: () => fetchNotes({ page, perPage: PER_PAGE, search, tag }),
     placeholderData: keepPreviousData,
   });
 
