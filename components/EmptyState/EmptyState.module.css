@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 72px 16px;
+  text-align: center;
+}
+
+.icon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 8px;
+  color: #adb5bd;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #212529;
+}
+
+.text {
+  max-width: 360px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #6c757d;
+}
+
+.query {
+  color: #212529;
+  font-weight: 500;
+}
